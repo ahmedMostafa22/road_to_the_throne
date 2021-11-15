@@ -1,0 +1,48 @@
+name: road_to_the_throne
+description: road_to_the_throne
+publish_to: 'none'
+version: 1.0.0+1
+
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #UI:
+  flutter_spinkit: ^5.1.0
+  cupertino_icons: ^1.0.2
+  fluttertoast: ^8.0.8
+
+  #utility:
+  image_picker: ^0.7.4
+  formdator: ^0.12.1
+
+  #state_management:
+  flutter_bloc: ^7.3.1
+
+  #text_style:
+  google_fonts: ^2.1.0
+
+  #animations:
+  animate_do: ^2.0.0
+  animations: ^2.0.1
+
+  #firebase:
+  firebase_auth: ^3.2.0
+  cloud_firestore: ^3.1.0
+  firebase_core: ^1.10.0
+  firebase_storage: ^10.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/

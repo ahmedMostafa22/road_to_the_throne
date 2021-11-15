@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "351807837012",
+    "project_id": "roadtothethrone-2623f",
+    "storage_bucket": "roadtothethrone-2623f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351807837012:android:120c9c4f29fa941139aec1",
+        "android_client_info": {
+          "package_name": "com.rott.rott"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "351807837012-prtggb81n3ovhem74qdh651omruvr3kg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUxXENF0kUZv91aUEncXzUvLE_Fx9fRu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "351807837012-prtggb81n3ovhem74qdh651omruvr3kg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
