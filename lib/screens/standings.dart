@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 import 'package:road_to_the_throne/bloc/cubits/leagues/leagues_cubit.dart';
@@ -44,11 +45,18 @@ class _StandingsScreenState extends State<StandingsScreen> {
         ),
         body: ListView.builder(
             itemBuilder: (c, i) => InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (c) =>
-                              PlayerDetailsScreen(uid: items[i].player.id))),
+                  onTap: () {
+                    if (items[i].player.id !=
+                        FirebaseAuth.instance.currentUser!.uid) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (c) => PlayerDetailsScreen(
+                                  firstUid: items[i].player.id,
+                                  secondUid:
+                                      FirebaseAuth.instance.currentUser!.uid)));
+                    }
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(

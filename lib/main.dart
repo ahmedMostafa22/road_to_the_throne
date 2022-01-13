@@ -85,6 +85,12 @@ class MyApp extends StatelessWidget {
                     fontSize: 18,
                     fontFamily:
                         Theme.of(context).textTheme.headline6!.fontFamily))),
+        builder: (context, child) {
+          return MediaQuery(
+            child: child?? const SplashScreen(),
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+          );
+        },
         home: const SplashScreen(),
       ),
     );

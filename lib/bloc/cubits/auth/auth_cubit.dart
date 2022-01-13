@@ -43,6 +43,14 @@ class AuthCubit extends Cubit<AuthState> {
         'image': imageUrl,
         'name': name,
         'email': userCredential.user!.email,
+        'wonLeagues':0,
+        'gamesCount':0,
+        'wonMatches':0,
+        'lostMatches':0,
+        'drawMatches':0,
+        'goalsScored':0,
+        'goalsConceded':0,
+        'leaguesPlayed':0,
         'favTeam': 'NA'
       });
       FlutterToastHelper.showSuccessToast('Signed up successfully');
@@ -67,4 +75,5 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   bool _checkUserSignedIn() => !(FirebaseAuth.instance.currentUser == null);
+
 }

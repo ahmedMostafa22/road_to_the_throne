@@ -17,7 +17,7 @@ class TeamsCubit extends Cubit<TeamsState> {
       if ((state is TeamsInitial) == false) return;
       emit(TeamsLoading());
       QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection('teams').get();
+          await FirebaseFirestore.instance.collection('teams').orderBy('name').get();
       List<Team> teams =
           querySnapshot.docs.map((t) => Team.fromFirestore(t)).toList();
       teams.removeWhere((t) => t.name == 'NA');

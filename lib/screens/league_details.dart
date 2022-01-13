@@ -6,6 +6,7 @@ import 'package:road_to_the_throne/bloc/cubits/leagues/leagues_cubit.dart';
 import 'package:road_to_the_throne/bloc/cubits/matches/matches_cubit.dart';
 import 'package:road_to_the_throne/bloc/cubits/simple_players/simple_players_cubit.dart';
 import 'package:road_to_the_throne/bloc/cubits/teams/teams_cubit.dart';
+import 'package:road_to_the_throne/models/drop_down_item.dart';
 import 'package:road_to_the_throne/models/league.dart';
 import 'package:road_to_the_throne/models/match.dart';
 import 'package:road_to_the_throne/models/simple_player.dart';
@@ -39,7 +40,6 @@ class _LeagueDetailsScreenState extends State<LeagueDetailsScreen> {
               .players
               .firstWhere((p) => p.id == pId));
     }
-    print(players.length);
     Future.delayed(Duration.zero, () async {
       matches = await BlocProvider.of<MatchesCubit>(context).getLeagueMatches(
           widget.league.id,
@@ -63,11 +63,15 @@ class _LeagueDetailsScreenState extends State<LeagueDetailsScreen> {
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (c) =>
-                          AddMatchScreen(leagueId: widget.league.id)))),
+                      builder: (c) => AddMatchScreen(
+                          leagueId: widget.league.id,
+                          players: players,
+                          teams: (BlocProvider.of<TeamsCubit>(context).state
+                                  as TeamsLoaded)
+                              .teams)))),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -107,16 +111,18 @@ class _LeagueDetailsScreenState extends State<LeagueDetailsScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(16),
                                     child: MyPopupMenu(
-                                        data:
-                                            players.map((p) => p.name).toList(),
+                                        data: players
+                                            .map((p) => DropDownItemModel(
+                                                p.name, p.image))
+                                            .toList(),
                                         onChanged: (v) async {
                                           await BlocProvider.of<LeaguesCubit>(
                                                   context)
                                               .setLeagueWinner(
                                                   widget.league.id,
                                                   players
-                                                      .firstWhere(
-                                                          (p) => p.name == v)
+                                                      .firstWhere((p) =>
+                                                          p.name == v.text)
                                                       .id);
                                           Navigator.pop(context);
                                           Navigator.pop(context);

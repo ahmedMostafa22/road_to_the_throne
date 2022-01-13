@@ -1,7 +1,5 @@
-import 'package:road_to_the_throne/models/team.dart';
-
 class Player {
-  final String id, name, imageUrl;
+  final String id, name, imageUrl, favoriteTeam;
   final int wonLeaguesCount,
       leaguesParticipationCount,
       gamesCount,
@@ -22,5 +20,6 @@ class Player {
       this.drawsCount,
       this.goalsScored,
       this.goalsConceded,
-      this.leaguesParticipationCount);
+      this.leaguesParticipationCount,
+      this.favoriteTeam);
 }

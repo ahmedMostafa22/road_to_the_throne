@@ -24,17 +24,19 @@ class MatchHistoryItem extends StatelessWidget {
             .firstWhere((p) => match.secondPlayerId == p.id);
     return InkWell(
       onDoubleTap: () =>
-          BlocProvider.of<MatchesCubit>(context).deleteMatch(match.id),
-      onTap: () {
-        String uid = firstPlayer.id == FirebaseAuth.instance.currentUser!.uid
-            ? secondPlayer.id
-            : secondPlayer.id == FirebaseAuth.instance.currentUser!.uid
-                ? firstPlayer.id
-                : '';
-        if (uid.isEmpty) return;
-        Navigator.push(context,
-            MaterialPageRoute(builder: (c) => PlayerDetailsScreen(uid: uid)));
-      },
+          BlocProvider.of<MatchesCubit>(context).deleteMatch(match),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (c) => PlayerDetailsScreen(
+                  firstUid: match.firstPlayerId ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? match.secondPlayerId
+                      : match.firstPlayerId,
+                  secondUid: match.firstPlayerId !=
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? match.secondPlayerId
+                      : match.firstPlayerId))),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4),
         child: Row(

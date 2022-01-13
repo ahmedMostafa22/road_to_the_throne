@@ -42,9 +42,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     (BlocProvider.of<TeamsCubit>(context).state as TeamsLoaded)
                         .teams)
               ]))
-          .then((_) => BlocProvider.of<PlayerCubit>(context).getCurrentPlayer(
-              (context.read<MatchesCubit>().state as MatchesLoaded).matches,
-              (context.read<LeaguesCubit>().state as LeaguesLoaded).leagues));
+          .then(
+              (_) => BlocProvider.of<PlayerCubit>(context).getCurrentPlayer());
     }).then((_) => setState(() => loading = false));
     super.initState();
   }
@@ -64,7 +63,14 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                       MaterialPageRoute(
                           builder: (c) => _tabController.index == 1
                               ? const AddLeague()
-                              : const AddMatchScreen()))),
+                              : AddMatchScreen(
+                                  players: (BlocProvider.of<SimplePlayersCubit>(
+                                              context)
+                                          .state as SimplePlayersLoaded)
+                                      .players,
+                                  teams: (BlocProvider.of<TeamsCubit>(context)
+                                          .state as TeamsLoaded)
+                                      .teams)))),
               body: SafeArea(
                 child: NestedScrollView(
                   headerSliverBuilder:

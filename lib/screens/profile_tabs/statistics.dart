@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+import 'package:road_to_the_throne/bloc/cubits/teams/teams_cubit.dart';
 import 'package:road_to_the_throne/constants/assets.dart';
 import 'package:road_to_the_throne/models/player.dart';
 import 'package:road_to_the_throne/widgets/stats_item.dart';
@@ -13,6 +15,31 @@ class StatisticsTab extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(children: [
+          if (player.favoriteTeam != 'NA')
+            Column(
+              children: [
+                const Text('Favorite Team',
+                    style:
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
+                CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(
+                        (context.read<TeamsCubit>().state as TeamsLoaded)
+                            .teams
+                            .firstWhere((t) => t.id == player.favoriteTeam)
+                            .image)),
+                Text(
+                    (context.read<TeamsCubit>().state as TeamsLoaded)
+                        .teams
+                        .firstWhere((t) => t.id == player.favoriteTeam)
+                        .name,
+                    style: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 16),
+              ],
+            ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -83,10 +110,10 @@ class StatisticsTab extends StatelessWidget {
             children: [
               const Spacer(),
               StatisticsItem(
-                  t1: player.goalsScored.toString(), t2: 'Goals Scored'),
+                  t1: player.goalsScored.toString(), t2: 'Scored'),
               const Spacer(),
               StatisticsItem(
-                  t1: player.goalsConceded.toString(), t2: 'Goals Conceded'),
+                  t1: player.goalsConceded.toString(), t2: 'Conceded'),
               const Spacer(),
               StatisticsItem(
                   t1: (player.goalsScored - player.goalsConceded).toString(),

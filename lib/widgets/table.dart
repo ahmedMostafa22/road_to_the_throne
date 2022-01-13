@@ -53,7 +53,7 @@ class _TableWidgetState extends State<TableWidget> {
                   style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold))),
           SizedBox(
               width: 24,
-              child: Text('PTS',
+              child: Text('PT',
                   style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold))),
         ]),
         const SizedBox(height: 16),
@@ -68,7 +68,9 @@ class _TableWidgetState extends State<TableWidget> {
                           context,
                           MaterialPageRoute(
                               builder: (c) => PlayerDetailsScreen(
-                                  uid: tableItems[i].player.id)));
+                                  firstUid: tableItems[i].player.id,
+                                  secondUid:
+                                      FirebaseAuth.instance.currentUser!.uid)));
                     }
                   },
                   child: Padding(
@@ -102,10 +104,10 @@ class _TableWidgetState extends State<TableWidget> {
                           child: Text(tableItems[i].wins.toString())),
                       SizedBox(
                           width: 24,
-                          child: Text(tableItems[i].losses.toString())),
+                          child: Text(tableItems[i].draws.toString())),
                       SizedBox(
                           width: 24,
-                          child: Text(tableItems[i].draws.toString())),
+                          child: Text(tableItems[i].losses.toString())),
                       SizedBox(
                           width: 48,
                           child: Text(
